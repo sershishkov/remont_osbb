@@ -11,7 +11,7 @@ export interface I_UserAuthModel {
 }
 
 export interface I_JwtPayload {
-  id: string;
+  userId: string;
 }
 
 export interface I_GetUserAuthInfoToRequest extends Request {

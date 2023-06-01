@@ -1,149 +1,70 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import Model__User from '../../models/user/Model__User';
-import { MyRequestParams } from '../../interfaces/CommonInterfaces';
 
-//@desc   Add a __User
-//@route  POST /api/user-admin
+import { I_GetUserAuthInfoToRequest } from '../../interfaces/UserInterface';
+
+//@desc   Log user out / clear cookie
+//@route  GET /api/user/logout
 //@access Private
-export const add__User = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password, role } = req.body;
-
-  if (!name || !email || !password || !role) {
-    res.status(400);
-    throw new Error('Please add all fields');
-  }
-
-  //Check if user exists
-  const user__Exists = await Model__User.findOne({ email });
-  if (user__Exists) {
-    res.status(400);
-    throw new Error('User already exists');
-  }
-
-  const new__User = await Model__User.create({
-    name,
-    email,
-    password,
-    role: role === 'admin' ? 'user' : role,
+export const logout = asyncHandler(async (req: Request, res: Response) => {
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0),
   });
 
-  if (!new__User) {
-    res.status(400);
-    throw new Error('Invalid  data');
-  } else {
-    res.status(200).json({
-      succes: true,
-      my_data: new__User,
-    });
-  }
+  res.status(200).json({ message: 'Logged out successfully' });
 });
 
-//@desc   Updste a __User
-//@route  PUT /api/user-admin/:id
-//@access Private
-export const update__User = asyncHandler(
-  async (req: Request, res: Response) => {
-    const { name, email, password, role } = req.body;
+// @desc    Get user profile
+// @route   GET /api/user/profile
+// @access  Private
+export const getUserProfile = asyncHandler(
+  async (req: I_GetUserAuthInfoToRequest, res: Response) => {
+    const user = await Model__User.findById(req.user._id);
 
-    if (!req.body) {
-      res.status(400);
-      throw new Error('Please add all fields');
+    if (user) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      });
+    } else {
+      res.status(404);
+      throw new Error('User not found');
     }
-
-    const new__User = {
-      name,
-      email,
-      password,
-      role: role === 'admin' ? 'user' : role,
-    };
-
-    const updated__User = await Model__User.findByIdAndUpdate(
-      req.params.id,
-      new__User,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-
-    res.status(200).json({
-      success: true,
-      my_data: updated__User,
-    });
   }
 );
 
-//@desc   Get All __Users
-//@route  GET /api/user-admin
-//@access Private
-export const getAll__Users = asyncHandler(
-  async (req: Request<{}, {}, {}, MyRequestParams>, res: Response) => {
-    const page: number = parseInt(req.query.page) || 0;
-    const pageSize: number = parseInt(req.query.limit) || 0;
-    const skip = (page - 1) * pageSize;
-    const total: number = await Model__User.countDocuments({});
-    const totalPages: number =
-      pageSize === 0 ? total : Math.ceil(total / pageSize);
+// @desc    Update user profile
+// @route   PUT /api/user/profile
+// @access  Private
+export const updateUserProfile = asyncHandler(
+  async (req: I_GetUserAuthInfoToRequest, res: Response) => {
+    const user = await Model__User.findById(req.user._id);
 
-    // console.log(totalPages);
-    const list__User = await Model__User.find()
-      .limit(pageSize)
-      .skip(skip)
-      .sort({
-        name: 1,
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+
+      await user.save();
+
+      res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0),
       });
 
-    if (!list__User) {
-      res.status(400);
-      throw new Error('На данный момент ничего в базе нет');
+      res.status(200).json({
+        message: 'You updated your profile and Logged out successfully',
+      });
+    } else {
+      res.status(404);
+      throw new Error('User not found');
     }
-
-    res.status(200).json({
-      success: true,
-      my_data: {
-        items: list__User,
-        total,
-        totalPages,
-      },
-    });
-  }
-);
-
-//@desc   Get one __User
-//@route  GET /api/user-admin/:id
-//@access Private
-export const getOne__User = asyncHandler(
-  async (req: Request, res: Response) => {
-    const one__User = await Model__User.findById(req.params.id);
-
-    if (!one__User) {
-      res.status(400);
-      throw new Error('Нет  объекта с данным id');
-    }
-
-    res.status(200).json({
-      success: true,
-      my_data: one__User,
-    });
-  }
-);
-
-//@desc   DELETE one __User
-//@route  DELETE /api/user-admin/:id
-//@access Private
-export const delete__User = asyncHandler(
-  async (req: Request, res: Response) => {
-    const one__User = await Model__User.findByIdAndDelete(req.params.id);
-
-    if (!one__User) {
-      res.status(400);
-      throw new Error('Нет  объекта с данным id');
-    }
-
-    res.status(200).json({
-      success: true,
-      my_data: one__User._id,
-    });
   }
 );

@@ -27,7 +27,7 @@ const user__Schema = new Schema<I_UserAuthModel>(
     },
     role: {
       type: String,
-      enum: ['client', 'worker', 'accountant', 'manager', 'boss', 'admin'],
+      enum: ['client', 'worker', 'manager', 'accountant', 'boss', 'admin'],
       default: 'client',
     },
   },

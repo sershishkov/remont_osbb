@@ -15,33 +15,24 @@ export const protect = asyncHandler(
   ) => {
     let token;
 
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
-    ) {
-      try {
-        //Get token from header
-        token = req.headers.authorization.split(' ')[1];
+    token = req.cookies.jwt;
 
-        //verify token
-        const { id } = jwt.verify(
+    if (token) {
+      try {
+        const { userId } = jwt.verify(
           token,
           process.env.JWT_SECRET!
         ) as I_JwtPayload;
 
-        //GET user from the token
-
-        req.user = await Model__User.findById(id).select('-password');
+        req.user = await Model__User.findById(userId).select('-password');
 
         next();
       } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(401);
-        throw new Error('Not authorized');
+        throw new Error('Not authorized, token failed');
       }
-    }
-
-    if (!token) {
+    } else {
       res.status(401);
       throw new Error('Not authorized, no token');
     }

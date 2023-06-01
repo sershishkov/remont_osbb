@@ -1,6 +1,7 @@
 import path from 'path';
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 import { errorHandler } from './middlewares/errorMiddleware';
 import connectDB from './config/db';
@@ -13,6 +14,7 @@ const port = process.env.PORT || 5000;
 const app: Express = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use('/api', router);
 //Serve frontend
