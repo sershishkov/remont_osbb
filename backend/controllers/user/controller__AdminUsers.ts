@@ -25,7 +25,7 @@ export const add__User = asyncHandler(async (req: Request, res: Response) => {
     name,
     email,
     password,
-    role: role === 'admin' ? 'client' : role,
+    role: role === 'admin' ? 'user' : role,
   });
 
   if (!new__User) {
@@ -33,7 +33,7 @@ export const add__User = asyncHandler(async (req: Request, res: Response) => {
     throw new Error('Invalid  data');
   } else {
     res.status(200).json({
-      succes: true,
+      message: 'Добавлено успешно',
       my_data: new__User,
     });
   }
@@ -55,7 +55,7 @@ export const update__User = asyncHandler(
       name,
       email,
       password,
-      role: role === 'admin' ? 'client' : role,
+      role: role === 'admin' ? 'user' : role,
     };
 
     const updated__User = await Model__User.findByIdAndUpdate(
@@ -68,7 +68,7 @@ export const update__User = asyncHandler(
     );
 
     res.status(200).json({
-      success: true,
+      message: 'Изменено успешно',
       my_data: updated__User,
     });
   }
@@ -100,7 +100,7 @@ export const getAll__Users = asyncHandler(
     }
 
     res.status(200).json({
-      success: true,
+      message: 'Список сформирован успешно',
       my_data: {
         items: list__User,
         total,
@@ -123,7 +123,7 @@ export const getOne__User = asyncHandler(
     }
 
     res.status(200).json({
-      success: true,
+      message: 'Элемент найден успешно',
       my_data: one__User,
     });
   }
@@ -142,7 +142,7 @@ export const delete__User = asyncHandler(
     }
 
     res.status(200).json({
-      success: true,
+      message: 'Элемент удален успешно',
       my_data: one__User._id,
     });
   }
