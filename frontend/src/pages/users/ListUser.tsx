@@ -1,9 +1,6 @@
-import { useAppSelector } from '../../app/hooks';
-import { RootState } from '../../app/store';
+import MyIconButtonAdd from '../../components/common/MyIconButtonAdd';
 
-import MyIconButtonAdd from '../../components/account/MyIconButtonAdd';
-
-import TableSimple from '../../components/account/TableSimple';
+import TableFilter from '../../components/common/TableFilter';
 
 import {
   user__get_all,
@@ -13,24 +10,23 @@ import {
 const editLink = `/user-admin`;
 
 const ListUser = () => {
-  const { items, total, isLoading } = useAppSelector(
-    (state: RootState) => state.users__state
-  );
+  // const currentState = store.getState().users__state;
+  const currentState = 'users__state';
   const headerFields = ['Name', 'email', 'role'];
   const tableFields = ['name', 'email', 'role'];
+
   return (
     <>
       <MyIconButtonAdd href={`${editLink}/add`} />
 
-      <TableSimple
-        items={items}
-        total={total}
-        isLoading={isLoading}
+      <TableFilter
+        currentState={currentState}
         get__all={user__get_all}
         delete__one={user__delete_one}
         headerFields={headerFields}
         tableFields={tableFields}
         editLink={editLink}
+        tableHeader={`ПольЗователи`}
       />
     </>
   );

@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface I_Theme {
+  is_dark_mode: boolean;
+  isLoading?: boolean;
+  items?: any[];
+  total?: number;
+}
+
+const initialState: I_Theme = {
   is_dark_mode: false,
 };
 

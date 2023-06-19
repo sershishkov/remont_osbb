@@ -1,5 +1,5 @@
 export interface MyRequestParams {
-  page: string;
-  limit: string;
+  page?: string;
+  limit?: string;
   filter?: Object;
 }

@@ -79,15 +79,25 @@ export const update__User = asyncHandler(
 //@access Private
 export const getAll__Users = asyncHandler(
   async (req: Request<{}, {}, {}, MyRequestParams>, res: Response) => {
-    const page: number = parseInt(req.query.page) || 0;
-    const pageSize: number = parseInt(req.query.limit) || 0;
+    const page: number = parseInt(req.query.page ?? '0');
+    const pageSize: number = parseInt(req.query.limit ?? '0');
     const skip = (page - 1) * pageSize;
     const total: number = await Model__User.countDocuments({});
     const totalPages: number =
       pageSize === 0 ? total : Math.ceil(total / pageSize);
 
+    let filterObject = {};
+
+    if (req.query.filter) {
+      const myRegex = { $regex: req.query.filter };
+
+      filterObject = {
+        $or: [{ name: myRegex }, { email: myRegex }, { role: myRegex }],
+      };
+    }
+
     // console.log(totalPages);
-    const list__User = await Model__User.find()
+    const list__User = await Model__User.find(filterObject)
       .limit(pageSize)
       .skip(skip)
       .sort({

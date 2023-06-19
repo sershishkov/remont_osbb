@@ -32,10 +32,10 @@ const item__get_all = async (
   dataObject?: I_AuthRequest
 ): Promise<I_ServerResponse<I_AuthResponse> | null> => {
   const response = await axios.get(
-    `${API_URL}/?page=${dataObject?.page}&limit=${dataObject?.limit}`
+    `${API_URL}/?page=${dataObject?.page}&limit=${dataObject?.limit}&filter=${dataObject?.filter}`
   );
-  const message = response.data.message;
-  toast.success(message);
+  // const message = response.data.message;
+  // toast.success(message);
 
   return response.data.my_data;
 };

@@ -7,6 +7,8 @@ import { I_AuthRequest, I_AuthResponse } from '../../interfaces/UserInterfaces';
 interface I_StateAuth {
   user: I_AuthResponse | null;
   isLoading: boolean;
+  items?: any[];
+  total?: number;
 }
 
 const initialState: I_StateAuth = {
