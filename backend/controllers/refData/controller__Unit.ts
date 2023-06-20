@@ -1,66 +1,60 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import Model__User from '../../models/user/Model__User';
+import Model__Unit from '../../models/refData/Model__Unit';
 import { MyRequestParams } from '../../interfaces/CommonInterfaces';
 
-//@desc   Add a __User
-//@route  POST /api/users
+//@desc   Add a __Unit
+//@route  POST /api/refdata/unit
 //@access Private
-export const add__User = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password, role } = req.body;
+export const add__Unit = asyncHandler(async (req: Request, res: Response) => {
+  const { unitName } = req.body;
 
-  if (!name || !email || !password || !role) {
+  if (!unitName) {
     res.status(400);
     throw new Error('Please add all fields');
   }
 
-  //Check if user exists
-  const user__Exists = await Model__User.findOne({ email });
-  if (user__Exists) {
+  // Check if already exists
+  const already__Exists = await Model__Unit.findOne({ unitName });
+  if (already__Exists) {
     res.status(400);
-    throw new Error('User already exists');
+    throw new Error('unitName already exists');
   }
 
-  const new__User = await Model__User.create({
-    name,
-    email,
-    password,
-    role: role === 'admin' ? 'user' : role,
+  const new__Unit = await Model__Unit.create({
+    unitName,
   });
 
-  if (!new__User) {
+  if (!new__Unit) {
     res.status(400);
     throw new Error('Invalid  data');
   } else {
     res.status(200).json({
       message: 'Добавлено успешно',
-      my_data: new__User,
+      my_data: new__Unit,
     });
   }
 });
 
-//@desc   Updste a __User
-//@route  PUT /api/users/:id
+//@desc   Updste a __Unit
+//@route  PUT /api/refdata/unit/:id
 //@access Private
-export const update__User = asyncHandler(
+export const update__Unit = asyncHandler(
   async (req: Request, res: Response) => {
-    const { name, email, password, role } = req.body;
+    const { unitName } = req.body;
 
-    if (!req.body) {
+    if (!unitName) {
       res.status(400);
       throw new Error('Please add all fields');
     }
 
-    const new__User = {
-      name,
-      email,
-      password,
-      role: role === 'admin' ? 'user' : role,
+    const new__Unit = {
+      unitName,
     };
 
-    const updated__User = await Model__User.findByIdAndUpdate(
+    const updated__Unit = await Model__Unit.findByIdAndUpdate(
       req.params.id,
-      new__User,
+      new__Unit,
       {
         new: true,
         runValidators: true,
@@ -69,20 +63,20 @@ export const update__User = asyncHandler(
 
     res.status(200).json({
       message: 'Изменено успешно',
-      my_data: updated__User,
+      my_data: updated__Unit,
     });
   }
 );
 
-//@desc   Get All __Users
-//@route  GET /api/users
+//@desc   Get All __Units
+//@route  GET /api/refdata/unit
 //@access Private
-export const getAll__Users = asyncHandler(
+export const getAll__Units = asyncHandler(
   async (req: Request<{}, {}, {}, MyRequestParams>, res: Response) => {
     const page: number = parseInt(req.query.page ?? '0');
     const pageSize: number = parseInt(req.query.limit ?? '0');
     const skip = (page - 1) * pageSize;
-    const total: number = await Model__User.countDocuments({});
+    const total: number = await Model__Unit.countDocuments({});
     const totalPages: number =
       pageSize === 0 ? total : Math.ceil(total / pageSize);
 
@@ -92,19 +86,18 @@ export const getAll__Users = asyncHandler(
       const myRegex = { $regex: req.query.filter, $options: 'i' };
 
       filterObject = {
-        $or: [{ name: myRegex }, { email: myRegex }, { role: myRegex }],
+        $or: [{ unitName: myRegex }],
       };
     }
 
-    // console.log(totalPages);
-    const list__User = await Model__User.find(filterObject)
+    const all__Units = await Model__Unit.find(filterObject)
       .limit(pageSize)
       .skip(skip)
       .sort({
-        name: 1,
+        unitName: 1,
       });
 
-    if (!list__User) {
+    if (!all__Units) {
       res.status(400);
       throw new Error('На данный момент ничего в базе нет');
     }
@@ -112,7 +105,7 @@ export const getAll__Users = asyncHandler(
     res.status(200).json({
       message: 'Список сформирован успешно',
       my_data: {
-        items: list__User,
+        items: all__Units,
         total,
         totalPages,
       },
@@ -120,40 +113,40 @@ export const getAll__Users = asyncHandler(
   }
 );
 
-//@desc   Get one __User
-//@route  GET /api/users/:id
+//@desc   Get one __Unit
+//@route  GET /api/refdata/unit/:id
 //@access Private
-export const getOne__User = asyncHandler(
+export const getOne__Unit = asyncHandler(
   async (req: Request, res: Response) => {
-    const one__User = await Model__User.findById(req.params.id);
+    const one__Unit = await Model__Unit.findById(req.params.id);
 
-    if (!one__User) {
+    if (!one__Unit) {
       res.status(400);
       throw new Error('Нет  объекта с данным id');
     }
 
     res.status(200).json({
       message: 'Элемент найден успешно',
-      my_data: one__User,
+      my_data: one__Unit,
     });
   }
 );
 
-//@desc   DELETE one __User
-//@route  DELETE /api/users/:id
+//@desc   DELETE one __Unit
+//@route  DELETE /api/refdata/unit/:id
 //@access Private
-export const delete__User = asyncHandler(
+export const delete__Unit = asyncHandler(
   async (req: Request, res: Response) => {
-    const one__User = await Model__User.findByIdAndDelete(req.params.id);
+    const one__Unit = await Model__Unit.findByIdAndDelete(req.params.id);
 
-    if (!one__User) {
+    if (!one__Unit) {
       res.status(400);
       throw new Error('Нет  объекта с данным id');
     }
 
     res.status(200).json({
       message: 'Элемент удален успешно',
-      my_data: one__User._id,
+      my_data: one__Unit._id,
     });
   }
 );

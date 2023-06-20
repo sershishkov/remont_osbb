@@ -58,6 +58,7 @@ function TableSimple({
   const deleteHanler = (_id: string) => {
     dispatch(delete__one({ _id }));
     dispatch(get__all({ page: 0, limit: 0, filter: '' }));
+    set__searchText('');
   };
 
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,12 +69,13 @@ function TableSimple({
   };
   useEffect(() => {
     dispatch(get__all({ page: 0, limit: 0, filter: '' }));
-    // return () => {
-    //   set__searchText('');
-    //   const searchInput = document.getElementById('searchText');
-    //   searchInput?.focus();
-    // };
   }, [get__all, dispatch]);
+
+  useEffect(() => {
+    set__searchText('');
+    const searchInput = document.getElementById('searchText');
+    searchInput?.focus();
+  }, []);
 
   if (isLoading) {
     return <CircularProgress />;
