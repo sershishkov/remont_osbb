@@ -20,8 +20,10 @@ import PrivateRoute from './components/layout/PrivateRoute';
 import { FreeRoutes } from './routes/FreeRoutes';
 import { AdminRoutes } from './routes/AdminRoutes';
 import { UserRoutes } from './routes/UserRoutes';
+import { ManagerRoutes } from './routes/ManagerRoutes';
 
 import { getUserProfile } from './features/auth/auth__Slice';
+import { manager_role } from './constants/constants';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -68,6 +70,15 @@ function App() {
                   ))}
                   <Route element={<PrivateRoute roles={['admin']} />}>
                     {AdminRoutes.map((route) => (
+                      <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.component}
+                      />
+                    ))}
+                  </Route>
+                  <Route element={<PrivateRoute roles={manager_role} />}>
+                    {ManagerRoutes.map((route) => (
                       <Route
                         key={route.path}
                         path={route.path}

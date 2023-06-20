@@ -16,12 +16,14 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
+import { manager_role, refData_links } from '../../constants/constants';
+
 function NavigationList({ toggleDrawer }: { toggleDrawer: Function }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state: RootState) => state.auth__state);
   const [openAuth, set__openAuth] = useState<boolean>(false);
-  // const [open__RefData, set__open__RefData] = useState<boolean>(false);
+  const [open__RefData, set__open__RefData] = useState<boolean>(false);
   // const [open__accounting, set__open__accounting] = useState<boolean>(false);
 
   const onLogout = () => {
@@ -125,6 +127,35 @@ function NavigationList({ toggleDrawer }: { toggleDrawer: Function }) {
           )}
         </List>
       </Collapse>
+      {manager_role.includes(user?.role!) && (
+        <>
+          <ListItemButton onClick={() => set__open__RefData(!open__RefData)}>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary='Справочники' />
+            {open__RefData ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open__RefData} timeout='auto' unmountOnExit>
+            <List disablePadding>
+              {refData_links.map((item) => (
+                <ListItemButton
+                  key={item.link}
+                  sx={{ pl: 4 }}
+                  component={Link}
+                  href={item.link}
+                  onClick={() => toggleDrawer(false)}
+                >
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={`${item.caption}`} />
+                </ListItemButton>
+              ))}
+            </List>
+          </Collapse>
+        </>
+      )}
     </List>
   );
 }
