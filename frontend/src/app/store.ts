@@ -4,6 +4,9 @@ import themeSlice from '../features/theme/themeSlice';
 
 import users__Slice from '../features/users/users__Slice';
 import unit__Slice from '../features/refData/unit/unit__Slice';
+import productgroup__Slice from '../features/refData/productgroup/productgroup__Slice';
+import producttype__Slice from '../features/refData/producttype/producttype__Slice';
+import products__Slice from '../features/refData/products/products__Slice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +15,9 @@ export const store = configureStore({
     users__state: users__Slice,
 
     unit__state: unit__Slice,
+    productgroup__state: productgroup__Slice,
+    producttype__state: producttype__Slice,
+    products__state: products__Slice,
   },
 });
 

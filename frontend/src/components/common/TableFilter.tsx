@@ -77,6 +77,19 @@ function TableSimple({
     searchInput?.focus();
   }, []);
 
+  const getMyItem = (row: any, item: string) => {
+    if (item.includes('.')) {
+      const dotIndex = item.indexOf('.');
+      const mfirst = item.slice(0, dotIndex);
+      const msecond = item.slice(dotIndex + 1);
+      const myObject = row[mfirst];
+      const innerProp = myObject[msecond];
+      return `${innerProp}`;
+    } else {
+      return `${row[item]}`;
+    }
+  };
+
   if (isLoading) {
     return <CircularProgress />;
   }
@@ -143,7 +156,9 @@ function TableSimple({
                   {tableFields &&
                     tableFields.map((item) => (
                       <TableCell align='center' key={item}>
-                        {row[item]}
+                        {/* {`${row[item]}`} */}
+                        {/* {item.includes('.') ? `${row[item]}` : `${row[item]}`} */}
+                        {getMyItem(row, item)}
                       </TableCell>
                     ))}
 
