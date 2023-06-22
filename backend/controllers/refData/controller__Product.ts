@@ -136,7 +136,11 @@ export const getAll__Products = asyncHandler(
       const myRegex = { $regex: req.query.filter, $options: 'i' };
 
       filterObject = {
-        $or: [{ productName: myRegex }],
+        $or: [
+          {
+            productName: myRegex,
+          },
+        ],
       };
     }
 

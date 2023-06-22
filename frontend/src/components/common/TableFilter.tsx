@@ -79,11 +79,8 @@ function TableSimple({
 
   const getMyItem = (row: any, item: string) => {
     if (item.includes('.')) {
-      const dotIndex = item.indexOf('.');
-      const mfirst = item.slice(0, dotIndex);
-      const msecond = item.slice(dotIndex + 1);
-      const myObject = row[mfirst];
-      const innerProp = myObject[msecond];
+      const arrFields = item.split('.');
+      const innerProp = row[arrFields[0]][arrFields[1]];
       return `${innerProp}`;
     } else {
       return `${row[item]}`;
@@ -156,8 +153,6 @@ function TableSimple({
                   {tableFields &&
                     tableFields.map((item) => (
                       <TableCell align='center' key={item}>
-                        {/* {`${row[item]}`} */}
-                        {/* {item.includes('.') ? `${row[item]}` : `${row[item]}`} */}
                         {getMyItem(row, item)}
                       </TableCell>
                     ))}
