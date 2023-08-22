@@ -39,6 +39,11 @@ export interface I_ServiceWorkGroup {
   serviceWorkGroupName: string; //Асфальт,Цоколь,ОкнаПласт, ДвериПласт, ГибкаОц,Швы межпанельные ...
 }
 
+export interface I_ThirdPartyServiceGroup {
+  _id?: string;
+  thirdPartyServiceGroupName: string; //смета, доставка,обслуживание оборудования, грузоподъемные, информационные,ремонт,вывоз мусора
+}
+
 export interface I_ServiceWork {
   _id?: string;
   serviceWorkName: string;
@@ -47,17 +52,12 @@ export interface I_ServiceWork {
   priceWorkerRecommend: number;
   priceClientRecommend?: number;
 
-  products?: Types.ObjectId[];
+  products?: Types.ObjectId[]; //цемент, краска, пенопласт...
 
   inventars?: Types.ObjectId[]; //шпатель, ведро, венчик, кисточка...
   tools?: Types.ObjectId[]; //дрель, переноска, перфоратор...
   equipment?: Types.ObjectId[]; //лестница, бетономешалка, компрессор...
   workerProtection?: Types.ObjectId[]; //перчатки, очки, маска, рабочая одежда...
-}
-
-export interface I_ThirdPartyServiceGroup {
-  _id?: string;
-  thirdPartyServiceGroupName: string; //смета, доставка,обслуживание оборудования, грузоподъемные, информационные,ремонт,вывоз мусора
 }
 
 export interface I_ThirdPartyService {

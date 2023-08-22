@@ -23,9 +23,9 @@ router.use('/refdata/productgroup', router__ProductGroup);
 router.use('/refdata/producttype', router__ProductType);
 router.use('/refdata/products', router__Product);
 
-router.use('/refdata/serviceworks', router__ServiceWork);
 router.use('/refdata/servicework-group', router__ServiceWorkGroup);
-router.use('/refdata/thirdpartyservices', router__ThirdPartyService);
 router.use('/refdata/thirdpartyservice-group', router__ThirdPartyServiceGroup);
+router.use('/refdata/serviceworks', router__ServiceWork);
+router.use('/refdata/thirdpartyservices', router__ThirdPartyService);
 
 export default router;

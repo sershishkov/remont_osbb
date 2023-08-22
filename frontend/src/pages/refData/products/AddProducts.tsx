@@ -9,11 +9,8 @@ import { productgroup__get_all } from '../../../features/refData/productgroup/pr
 import { producttype__get_all } from '../../../features/refData/producttype/producttype__Slice';
 import { unit__get_all } from '../../../features/refData/unit/unit__Slice';
 
-import {
-  I_Unit,
-  I_ProductGroup,
-  I_ProductType,
-} from '../../../interfaces/AccountingInterfaces';
+import MySelect from '../../../components/common/MySelect';
+import MySelectMultiple from '../../../components/common/MySelectMultiple';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -21,37 +18,15 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-
 import Stack from '@mui/material/Stack';
-
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import Checkbox from '@mui/material/Checkbox';
-import ListItemText from '@mui/material/ListItemText';
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 const initState = {
   productName: '',
   unit: '',
   productType: '',
+  productGroup: [],
   priceBuyRecommend: '',
   normPerOne: '',
   amountInPackage: '',
@@ -82,12 +57,12 @@ function AddProducts() {
   );
 
   const [formData, setFormdata] = useState(initState);
-  const [productGroup, set__productGroup] = useState<string[]>([]);
 
   const {
     productName,
     unit,
     productType,
+    productGroup,
     priceBuyRecommend,
     normPerOne,
     amountInPackage,
@@ -139,21 +114,23 @@ function AddProducts() {
     dispatch(products__add(created__Data));
   };
 
-  const handleChangeSelects = (event: SelectChangeEvent) => {
+  const handleChangeSelects = (targetName: string, targetValue: string) => {
     setFormdata((prevState) => ({
       ...prevState,
-      [event.target.name]: event.target.value as string,
+      [targetName]: targetValue,
     }));
   };
-  const handleChangeMultipleSelects = (event: SelectChangeEvent<string[]>) => {
-    const {
-      target: { value },
-    } = event;
-    set__productGroup(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
+
+  const handleChangeMultipleSelects = (
+    targetName: string,
+    targetValue: string[]
+  ) => {
+    setFormdata((prevState) => ({
+      ...prevState,
+      [targetName]: targetValue,
+    }));
   };
+
   const onClickAddItem = (link: string) => {
     navigate(`${link}`);
   };
@@ -195,23 +172,16 @@ function AddProducts() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <FormControl fullWidth>
-            <InputLabel id='unit-label'>unit</InputLabel>
-            <Select
-              labelId='unit-label'
-              id='unit'
-              name='unit'
-              value={unit ?? ''}
-              label='Размерность'
-              onChange={handleChangeSelects}
-            >
-              {arr__Units?.map((item: I_Unit) => (
-                <MenuItem key={item._id} value={item._id}>
-                  {item.unitName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <MySelect
+            selectName={`unit`}
+            selectLabel={`Размерность`}
+            fieldToShow={`unitName`}
+            handleChangeSelects={handleChangeSelects}
+            selectedItem={''}
+            // @ts-ignore
+            arrToSelect={arr__Units}
+          />
+
           <IconButton onClick={() => onClickAddItem('/refdata/unit/add')}>
             <AddIcon color='success' sx={{ fontSize: 30 }} />
           </IconButton>
@@ -224,37 +194,15 @@ function AddProducts() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <FormControl fullWidth>
-            <InputLabel id='productGroup-label'>productGroup</InputLabel>
-            <Select
-              labelId='productGroup-label'
-              id='productGroup'
-              multiple
-              value={productGroup ?? []}
-              onChange={handleChangeMultipleSelects}
-              input={<OutlinedInput label='productGroup' />}
-              renderValue={(selected) => (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {selected.map((value) => {
-                    const newItem = arr__ProductGroups?.find(
-                      (item) => item._id === value
-                    );
-                    return (
-                      <Chip key={value} label={newItem?.productGroupName} />
-                    );
-                  })}
-                </Box>
-              )}
-              MenuProps={MenuProps}
-            >
-              {arr__ProductGroups?.map((item: I_ProductGroup) => (
-                <MenuItem key={item._id} value={item._id}>
-                  <Checkbox checked={productGroup!.indexOf(item._id!) > -1} />
-                  <ListItemText primary={item.productGroupName} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <MySelectMultiple
+            selectName={`productGroup`}
+            selectLabel={`Группы товаров`}
+            fieldToShow={`productGroupName`}
+            handleChangeMultipleSelects={handleChangeMultipleSelects}
+            // @ts-ignore
+            arrToSelect={arr__ProductGroups}
+          />
+
           <IconButton
             onClick={() => onClickAddItem('/refdata/productgroup/add')}
           >
@@ -268,23 +216,16 @@ function AddProducts() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <FormControl fullWidth>
-            <InputLabel id='productType-label'>productType</InputLabel>
-            <Select
-              labelId='productType-label'
-              id='productType'
-              name='productType'
-              value={productType ?? ''}
-              label='Тип'
-              onChange={handleChangeSelects}
-            >
-              {arr__ProductTypes?.map((item: I_ProductType) => (
-                <MenuItem key={item._id} value={item._id}>
-                  {item.productTypeName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <MySelect
+            selectName={`productType`}
+            selectLabel={`Тип`}
+            fieldToShow={`productTypeName`}
+            handleChangeSelects={handleChangeSelects}
+            selectedItem={''}
+            // @ts-ignore
+            arrToSelect={arr__ProductTypes}
+          />
+
           <IconButton
             onClick={() => onClickAddItem('/refdata/producttype/add')}
           >

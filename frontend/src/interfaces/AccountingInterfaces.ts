@@ -35,3 +35,41 @@ export interface I_Product extends I_ClientRequest {
   length?: number;
   paintingArea?: number;
 }
+
+//////////////////////////////////////////
+export interface I_ServiceWorkGroup extends I_ClientRequest {
+  _id?: string;
+  serviceWorkGroupName?: string; //Асфальт,Цоколь,ОкнаПласт, ДвериПласт, ГибкаОц,Швы межпанельные ...
+}
+
+export interface I_ThirdPartyServiceGroup extends I_ClientRequest {
+  _id?: string;
+  thirdPartyServiceGroupName?: string; //смета, доставка,обслуживание оборудования, грузоподъемные, информационные,ремонт,вывоз мусора
+}
+
+export interface I_ServiceWork extends I_ClientRequest {
+  _id?: string;
+  serviceWorkName: string;
+  unit: string | I_Unit;
+  serviceWorkGroup: string[] | I_ServiceWorkGroup[];
+  priceWorkerRecommend: number;
+  priceClientRecommend?: number;
+
+  products?: string[] | I_Product[]; //цемент, краска, пенопласт...
+
+  inventars?: string[] | I_Product[]; //шпатель, ведро, венчик, кисточка...
+  tools?: string[] | I_Product[]; //дрель, переноска, перфоратор...
+  equipment?: string[] | I_Product[]; //лестница, бетономешалка, компрессор...
+  workerProtection?: string[] | I_Product[]; //перчатки, очки, маска, рабочая одежда...
+}
+
+export interface I_ThirdPartyService extends I_ClientRequest {
+  _id?: string;
+  thirdPartyServiceName: string;
+
+  unit: string | I_Unit;
+  thirdPartyServiceGroup: string[] | I_ThirdPartyServiceGroup[];
+  priceBuyRecommend: number;
+}
+
+//////////////////////////////////////////
