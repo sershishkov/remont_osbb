@@ -71,4 +71,24 @@ export const refData_links = [
     link: `${linkRefdata}/products`,
     caption: `products`,
   },
+  /////
+  {
+    link: `${linkRefdata}/servicework-group`,
+    caption: `Группы работ`,
+  },
+
+  {
+    link: `${linkRefdata}/thirdpartyservice-group`,
+    caption: `Группы работ сторонние`,
+  },
+
+  {
+    link: `${linkRefdata}/serviceworks`,
+    caption: `serviceworks`,
+  },
+
+  {
+    link: `${linkRefdata}/thirdpartyservices`,
+    caption: `thirdpartyservices`,
+  },
 ];

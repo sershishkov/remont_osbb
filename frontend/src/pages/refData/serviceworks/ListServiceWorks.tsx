@@ -12,16 +12,10 @@ const editLink = `/refdata/serviceworks`;
 function ListServiceWorks() {
   // const currentState = store.getState().users__state;
   const currentState = 'serviceworks__state';
-  const headerFields = [
-    'serviceWorkName',
-    'unit',
-    'serviceWorkGroup',
-    'priceWorkerRecommend',
-  ];
+  const headerFields = ['serviceWorkName', 'unit', 'priceWorkerRecommend'];
   const tableFields = [
     'serviceWorkName',
     'unit.unitName',
-    'serviceWorkGroup.serviceWorkGroupName',
     'priceWorkerRecommend',
   ];
   return (

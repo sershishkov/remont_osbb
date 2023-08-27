@@ -25,7 +25,7 @@ const MySelectMultiple = ({
   selectLabel,
   fieldToShow,
   handleChangeMultipleSelects,
-  selectdcedOptions,
+  selectedOptions,
   arrToSelect,
 }: {
   selectName: string;
@@ -35,21 +35,24 @@ const MySelectMultiple = ({
     targetName: string,
     targetValue: string[]
   ) => void;
-  selectdcedOptions: string[];
+  selectedOptions?: string[];
   arrToSelect: any[];
 }) => {
   const [thisSelect, set_thisSelect] = useState<string[]>([]);
+
   const handleChangeMultipleSelect = (event: SelectChangeEvent<string[]>) => {
     const { name, value } = event.target;
     set_thisSelect(typeof value === 'string' ? value.split(',') : value);
     handleChangeMultipleSelects(name, value as string[]);
   };
 
+  // console.log(fieldToShow);
+
   useEffect(() => {
-    if (selectdcedOptions) {
-      set_thisSelect(selectdcedOptions);
+    if (selectedOptions) {
+      set_thisSelect(selectedOptions);
     }
-  }, [selectdcedOptions]);
+  }, [selectedOptions]);
 
   return (
     <FormControl fullWidth>

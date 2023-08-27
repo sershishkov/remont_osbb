@@ -214,7 +214,7 @@ function EditProducts() {
             selectLabel={`Размерность`}
             fieldToShow={`unitName`}
             handleChangeSelects={handleChangeSelects}
-            selectdcedOption={`${unit}` ?? ''}
+            selectedOption={`${unit}` ?? ``}
             // @ts-ignore
             arrToSelect={arr__Units}
           />
@@ -234,9 +234,9 @@ function EditProducts() {
           <MySelectMultiple
             selectName={`productGroup`}
             selectLabel={`Группы товаров`}
-            fieldToShow={`productGroupName`}
+            fieldToShow={'productGroupName'}
             handleChangeMultipleSelects={handleChangeMultipleSelects}
-            selectdcedOptions={productGroup ?? []}
+            selectedOptions={productGroup ?? []}
             // @ts-ignore
             arrToSelect={arr__ProductGroups}
           />
@@ -257,9 +257,9 @@ function EditProducts() {
           <MySelect
             selectName={`productType`}
             selectLabel={`Тип`}
-            fieldToShow={`productTypeName`}
+            fieldToShow={'productTypeName'}
             handleChangeSelects={handleChangeSelects}
-            selectdcedOption={`${productType}` ?? ''}
+            selectedOption={productType ?? ``}
             // @ts-ignore
             arrToSelect={arr__ProductTypes}
           />

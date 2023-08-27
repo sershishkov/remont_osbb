@@ -9,14 +9,14 @@ const MySelect = ({
   selectLabel,
   fieldToShow,
   handleChangeSelects,
-  selectdcedOption,
+  selectedOption,
   arrToSelect,
 }: {
   selectName: string;
   selectLabel: string;
   fieldToShow: string;
   handleChangeSelects: (targetName: string, targetValue: string) => void;
-  selectdcedOption: string;
+  selectedOption: string;
   arrToSelect: any[];
 }) => {
   const [thisSelectValue, set_thisSelectValue] = useState('');
@@ -28,10 +28,10 @@ const MySelect = ({
   };
 
   useEffect(() => {
-    if (selectdcedOption) {
-      set_thisSelectValue(selectdcedOption);
+    if (selectedOption) {
+      set_thisSelectValue(selectedOption);
     }
-  }, [selectdcedOption]);
+  }, [selectedOption]);
 
   return (
     <FormControl fullWidth>

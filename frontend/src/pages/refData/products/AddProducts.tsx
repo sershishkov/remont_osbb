@@ -177,7 +177,7 @@ function AddProducts() {
             selectLabel={`Размерность`}
             fieldToShow={`unitName`}
             handleChangeSelects={handleChangeSelects}
-            selectedItem={''}
+            selectedOption={''}
             // @ts-ignore
             arrToSelect={arr__Units}
           />
@@ -221,7 +221,7 @@ function AddProducts() {
             selectLabel={`Тип`}
             fieldToShow={`productTypeName`}
             handleChangeSelects={handleChangeSelects}
-            selectedItem={''}
+            selectedOption={''}
             // @ts-ignore
             arrToSelect={arr__ProductTypes}
           />

@@ -49,10 +49,10 @@ export interface I_ThirdPartyServiceGroup extends I_ClientRequest {
 
 export interface I_ServiceWork extends I_ClientRequest {
   _id?: string;
-  serviceWorkName: string;
-  unit: string | I_Unit;
-  serviceWorkGroup: string[] | I_ServiceWorkGroup[];
-  priceWorkerRecommend: number;
+  serviceWorkName?: string;
+  unit?: string | I_Unit;
+  serviceWorkGroup?: string[] | I_ServiceWorkGroup[];
+  priceWorkerRecommend?: number;
   priceClientRecommend?: number;
 
   products?: string[] | I_Product[]; //цемент, краска, пенопласт...
@@ -65,11 +65,11 @@ export interface I_ServiceWork extends I_ClientRequest {
 
 export interface I_ThirdPartyService extends I_ClientRequest {
   _id?: string;
-  thirdPartyServiceName: string;
+  thirdPartyServiceName?: string;
 
-  unit: string | I_Unit;
-  thirdPartyServiceGroup: string[] | I_ThirdPartyServiceGroup[];
-  priceBuyRecommend: number;
+  unit?: string | I_Unit;
+  thirdPartyServiceGroup?: string[] | I_ThirdPartyServiceGroup[];
+  priceBuyRecommend?: number;
 }
 
 //////////////////////////////////////////
