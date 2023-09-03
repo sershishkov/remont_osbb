@@ -12,7 +12,7 @@ const editLink = `/refdata/thirdpartyservice-group`;
 function ListThirdPartyServiceGroup() {
   // const currentState = store.getState().users__state;
   const currentState = 'thirdpartyservice_group__state';
-  const headerFields = ['Name'];
+  const headerFields = ['Наименование'];
   const tableFields = ['thirdPartyServiceGroupName'];
   return (
     <>

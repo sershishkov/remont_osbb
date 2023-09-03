@@ -12,16 +12,10 @@ const editLink = `/refdata/thirdpartyservices`;
 function ListThirdPartyServices() {
   // const currentState = store.getState().users__state;
   const currentState = 'thirdpartyservices__state';
-  const headerFields = [
-    'thirdPartyServiceName',
-    'unit',
-    'thirdPartyServiceGroup',
-    'priceBuyRecommend',
-  ];
+  const headerFields = ['Наименование', 'ед.изм', 'Цена Вход'];
   const tableFields = [
     'thirdPartyServiceName',
     'unit.unitName',
-    'thirdPartyServiceGroup.thirdPartyServiceGroupName',
     'priceBuyRecommend',
   ];
   return (
@@ -35,7 +29,7 @@ function ListThirdPartyServices() {
         headerFields={headerFields}
         tableFields={tableFields}
         editLink={editLink}
-        tableHeader={`Единицы измерения`}
+        tableHeader={`Сторонние сервисы`}
       />
     </>
   );

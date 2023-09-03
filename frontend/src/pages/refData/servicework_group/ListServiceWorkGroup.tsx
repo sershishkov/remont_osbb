@@ -12,7 +12,7 @@ const editLink = `/refdata/servicework-group`;
 function ListServiceWorkGroup() {
   // const currentState = store.getState().users__state;
   const currentState = 'servicework_group__state';
-  const headerFields = ['Name'];
+  const headerFields = ['Наименование'];
   const tableFields = ['serviceWorkGroupName'];
   return (
     <>

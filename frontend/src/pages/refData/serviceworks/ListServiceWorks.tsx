@@ -12,7 +12,7 @@ const editLink = `/refdata/serviceworks`;
 function ListServiceWorks() {
   // const currentState = store.getState().users__state;
   const currentState = 'serviceworks__state';
-  const headerFields = ['serviceWorkName', 'unit', 'priceWorkerRecommend'];
+  const headerFields = ['Наименование', 'ед.изм', 'Цена Вход'];
   const tableFields = [
     'serviceWorkName',
     'unit.unitName',

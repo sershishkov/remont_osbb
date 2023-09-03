@@ -12,7 +12,7 @@ const editLink = `/refdata/producttype`;
 function ListProductType() {
   // const currentState = store.getState().users__state;
   const currentState = 'producttype__state';
-  const headerFields = ['Name'];
+  const headerFields = ['Наименование'];
   const tableFields = ['productTypeName'];
   return (
     <>

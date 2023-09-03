@@ -12,7 +12,7 @@ const editLink = `/refdata/productgroup`;
 function ListProductGroup() {
   // const currentState = store.getState().users__state;
   const currentState = 'productgroup__state';
-  const headerFields = ['Name'];
+  const headerFields = ['Наименование'];
   const tableFields = ['productGroupName'];
   return (
     <>

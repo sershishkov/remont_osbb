@@ -10,8 +10,8 @@ import { products__get_all } from '../../../features/refData/products/products__
 
 import { unit__get_all } from '../../../features/refData/unit/unit__Slice';
 
-import MySelect from '../../../components/common/MySelect';
-import MySelectMultiple from '../../../components/common/MySelectMultiple';
+import MySelectAutoCompl from '../../../components/common/MySelectAutoCompl';
+import MySelectMultipleAutoCompl from '../../../components/common/MySelectMultipleAutoCompl';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -220,12 +220,11 @@ function AddServiceWorks() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelect
+          <MySelectAutoCompl
             selectName={`unit`}
             selectLabel={`Размерность`}
             fieldToShow={`unitName`}
             handleChangeSelects={handleChangeSelects}
-            selectedOption={''}
             // @ts-ignore
             arrToSelect={arr__Units}
           />
@@ -242,7 +241,7 @@ function AddServiceWorks() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelectMultiple
+          <MySelectMultipleAutoCompl
             selectName={`serviceWorkGroup`}
             selectLabel={`Группы работ`}
             fieldToShow={`serviceWorkGroupName`}
@@ -301,7 +300,7 @@ function AddServiceWorks() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelectMultiple
+          <MySelectMultipleAutoCompl
             selectName={`products`}
             selectLabel={`Товары`}
             fieldToShow={`productName`}
@@ -322,7 +321,7 @@ function AddServiceWorks() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelectMultiple
+          <MySelectMultipleAutoCompl
             selectName={`inventars`}
             selectLabel={`Инвентарь`}
             fieldToShow={`productName`}
@@ -343,7 +342,7 @@ function AddServiceWorks() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelectMultiple
+          <MySelectMultipleAutoCompl
             selectName={`tools`}
             selectLabel={`Инструмент`}
             fieldToShow={`productName`}
@@ -364,7 +363,7 @@ function AddServiceWorks() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelectMultiple
+          <MySelectMultipleAutoCompl
             selectName={`equipment`}
             selectLabel={`Оборудование`}
             fieldToShow={`productName`}
@@ -385,7 +384,7 @@ function AddServiceWorks() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelectMultiple
+          <MySelectMultipleAutoCompl
             selectName={`workerProtection`}
             selectLabel={`Средства Защиты`}
             fieldToShow={`productName`}

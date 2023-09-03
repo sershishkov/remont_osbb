@@ -12,8 +12,8 @@ import { productgroup__get_all } from '../../../features/refData/productgroup/pr
 import { producttype__get_all } from '../../../features/refData/producttype/producttype__Slice';
 import { unit__get_all } from '../../../features/refData/unit/unit__Slice';
 
-import MySelect from '../../../components/common/MySelect';
-import MySelectMultiple from '../../../components/common/MySelectMultiple';
+import MySelectAutoCompl from '../../../components/common/MySelectAutoCompl';
+import MySelectMultipleAutoCompl from '../../../components/common/MySelectMultipleAutoCompl';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -209,12 +209,13 @@ function EditProducts() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelect
+          <MySelectAutoCompl
             selectName={`unit`}
             selectLabel={`Размерность`}
             fieldToShow={`unitName`}
             handleChangeSelects={handleChangeSelects}
-            selectedOption={`${unit}` ?? ``}
+            // prettier-ignore
+            selectedOption={unit ?? ""}
             // @ts-ignore
             arrToSelect={arr__Units}
           />
@@ -231,7 +232,7 @@ function EditProducts() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelectMultiple
+          <MySelectMultipleAutoCompl
             selectName={`productGroup`}
             selectLabel={`Группы товаров`}
             fieldToShow={'productGroupName'}
@@ -254,12 +255,13 @@ function EditProducts() {
           spacing={2}
           // direction={{ xs: 'column', sm: 'row' }}
         >
-          <MySelect
+          <MySelectAutoCompl
             selectName={`productType`}
             selectLabel={`Тип`}
             fieldToShow={'productTypeName'}
             handleChangeSelects={handleChangeSelects}
-            selectedOption={productType ?? ``}
+            // prettier-ignore
+            selectedOption={productType ?? ""}
             // @ts-ignore
             arrToSelect={arr__ProductTypes}
           />
@@ -389,7 +391,9 @@ function EditProducts() {
         <Button
           type='submit'
           fullWidth
-          disabled={!productName || !unit || !productGroup || !productType}
+          disabled={
+            !productName || !unit || productGroup.length === 0 || !productType
+          }
           variant='contained'
           sx={{ mt: 3, mb: 2 }}
         >

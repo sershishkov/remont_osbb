@@ -54,22 +54,22 @@ const linkRefdata = '/refdata';
 export const refData_links = [
   {
     link: `${linkRefdata}/unit`,
-    caption: `unit`,
+    caption: `Ед.Измер`,
   },
 
   {
     link: `${linkRefdata}/productgroup`,
-    caption: `productgroup`,
+    caption: `Группа товаров`,
   },
 
   {
     link: `${linkRefdata}/producttype`,
-    caption: `producttype`,
+    caption: `Тип товара`,
   },
 
   {
     link: `${linkRefdata}/products`,
-    caption: `products`,
+    caption: `Товары`,
   },
   /////
   {
@@ -84,11 +84,11 @@ export const refData_links = [
 
   {
     link: `${linkRefdata}/serviceworks`,
-    caption: `serviceworks`,
+    caption: `Наши работы(услуги)`,
   },
 
   {
     link: `${linkRefdata}/thirdpartyservices`,
-    caption: `thirdpartyservices`,
+    caption: `Сторонние работы(услуги)`,
   },
 ];

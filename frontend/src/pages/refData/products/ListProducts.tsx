@@ -12,12 +12,7 @@ const editLink = `/refdata/products`;
 function ListProducts() {
   // const currentState = store.getState().users__state;
   const currentState = 'products__state';
-  const headerFields = [
-    'productName',
-    'unit',
-    'priceBuyRecommend',
-    'productType',
-  ];
+  const headerFields = ['Наименование', 'ед.изм', 'Цена вход', 'Тип товара'];
   const tableFields = [
     'productName',
     'unit.unitName',

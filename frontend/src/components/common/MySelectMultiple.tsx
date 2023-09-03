@@ -46,8 +46,6 @@ const MySelectMultiple = ({
     handleChangeMultipleSelects(name, value as string[]);
   };
 
-  // console.log(fieldToShow);
-
   useEffect(() => {
     if (selectedOptions) {
       set_thisSelect(selectedOptions);
