@@ -24,6 +24,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const initState = {
   productName: '',
+  description: '',
   unit: '',
   productType: '',
   productGroup: [],
@@ -60,6 +61,7 @@ function AddProducts() {
 
   const {
     productName,
+    description,
     unit,
     productType,
     productGroup,
@@ -96,6 +98,7 @@ function AddProducts() {
 
     const created__Data = {
       productName,
+      description,
       unit,
       productGroup,
       productType,
@@ -162,6 +165,20 @@ function AddProducts() {
           type='text'
           id='productName'
           value={productName ?? ''}
+          onChange={onChange}
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          margin='normal'
+          multiline
+          maxRows={4}
+          fullWidth
+          name='description'
+          label='Описание'
+          type='text'
+          id='description'
+          value={description ?? ''}
           onChange={onChange}
         />
       </Grid>

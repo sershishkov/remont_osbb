@@ -25,6 +25,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const initState = {
   serviceWorkName: '',
+  description: '',
   unit: '',
   serviceWorkGroup: [],
   priceWorkerRecommend: '',
@@ -106,6 +107,7 @@ function AddServiceWorks() {
 
   const {
     serviceWorkName,
+    description,
     unit,
     serviceWorkGroup,
     priceWorkerRecommend,
@@ -140,6 +142,7 @@ function AddServiceWorks() {
 
     const created__Data = {
       serviceWorkName,
+      description,
       unit,
       serviceWorkGroup,
 
@@ -210,6 +213,20 @@ function AddServiceWorks() {
           type='text'
           id='serviceWorkName'
           value={serviceWorkName ?? ''}
+          onChange={onChange}
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          margin='normal'
+          multiline
+          maxRows={4}
+          fullWidth
+          name='description'
+          label='Описание'
+          type='text'
+          id='description'
+          value={description ?? ''}
           onChange={onChange}
         />
       </Grid>

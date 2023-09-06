@@ -10,6 +10,7 @@ export const add__ThirdPartyService = asyncHandler(
   async (req: Request, res: Response) => {
     const {
       thirdPartyServiceName,
+      description,
       unit,
       thirdPartyServiceGroup,
       priceBuyRecommend,
@@ -36,6 +37,7 @@ export const add__ThirdPartyService = asyncHandler(
 
     const new__ThirdPartyService = await Model__ThirdPartyService.create({
       thirdPartyServiceName,
+      description,
       unit,
       thirdPartyServiceGroup,
       priceBuyRecommend,
@@ -60,6 +62,7 @@ export const update__ThirdPartyService = asyncHandler(
   async (req: Request, res: Response) => {
     const {
       thirdPartyServiceName,
+      description,
       unit,
       thirdPartyServiceGroup,
       priceBuyRecommend,
@@ -72,6 +75,7 @@ export const update__ThirdPartyService = asyncHandler(
 
     const new__ThirdPartyService = {
       thirdPartyServiceName,
+      description,
       unit,
       thirdPartyServiceGroup,
       priceBuyRecommend,

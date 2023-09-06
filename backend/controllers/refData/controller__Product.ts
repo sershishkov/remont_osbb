@@ -10,6 +10,7 @@ export const add__Product = asyncHandler(
   async (req: Request, res: Response) => {
     const {
       productName,
+      description,
       unit,
       productGroup,
       productType,
@@ -37,6 +38,7 @@ export const add__Product = asyncHandler(
 
     const new__Product = await Model__Product.create({
       productName,
+      description,
       unit,
       productGroup,
       productType,
@@ -69,6 +71,7 @@ export const update__Product = asyncHandler(
   async (req: Request, res: Response) => {
     const {
       productName,
+      description,
       unit,
       productGroup,
       productType,
@@ -89,6 +92,7 @@ export const update__Product = asyncHandler(
 
     const new__Product = {
       productName,
+      description,
       unit,
       productGroup,
       productType,

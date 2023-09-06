@@ -10,6 +10,7 @@ export const add__ServiceWork = asyncHandler(
   async (req: Request, res: Response) => {
     const {
       serviceWorkName,
+      description,
       unit,
       serviceWorkGroup,
       priceWorkerRecommend,
@@ -42,6 +43,7 @@ export const add__ServiceWork = asyncHandler(
 
     const new__ServiceWork = await Model__ServiceWork.create({
       serviceWorkName,
+      description,
       unit,
       serviceWorkGroup,
       priceWorkerRecommend,
@@ -72,6 +74,7 @@ export const update__ServiceWork = asyncHandler(
   async (req: Request, res: Response) => {
     const {
       serviceWorkName,
+      description,
       unit,
       serviceWorkGroup,
       priceWorkerRecommend,
@@ -90,6 +93,7 @@ export const update__ServiceWork = asyncHandler(
 
     const new__ServiceWork = {
       serviceWorkName,
+      description,
       unit,
       serviceWorkGroup,
       priceWorkerRecommend,

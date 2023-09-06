@@ -8,6 +8,10 @@ const thirdPartyService__Schema = new Schema<I_ThirdPartyService>({
     required: [true, 'Please add a thirdPartyService name'],
     unique: true,
   },
+  description: {
+    type: String,
+    default: 'Пока нет описания',
+  },
   unit: {
     type: Schema.Types.ObjectId,
     ref: 'unit',

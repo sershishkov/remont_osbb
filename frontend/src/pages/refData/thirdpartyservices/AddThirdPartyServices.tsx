@@ -24,6 +24,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const initState = {
   thirdPartyServiceName: '',
+  description: '',
   unit: '',
   thirdPartyServiceGroup: [],
   priceBuyRecommend: '',
@@ -49,6 +50,7 @@ function AddThirdPartyServices() {
 
   const {
     thirdPartyServiceName,
+    description,
     unit,
     thirdPartyServiceGroup,
     priceBuyRecommend,
@@ -78,6 +80,7 @@ function AddThirdPartyServices() {
 
     const created__Data = {
       thirdPartyServiceName,
+      description,
       unit,
       thirdPartyServiceGroup,
       priceBuyRecommend: priceBuyRecommend ? Number(priceBuyRecommend) : 1,
@@ -137,6 +140,20 @@ function AddThirdPartyServices() {
           type='text'
           id='thirdPartyServiceName'
           value={thirdPartyServiceName ?? ''}
+          onChange={onChange}
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          margin='normal'
+          multiline
+          maxRows={4}
+          fullWidth
+          name='description'
+          label='Описание'
+          type='text'
+          id='description'
+          value={description ?? ''}
           onChange={onChange}
         />
       </Grid>

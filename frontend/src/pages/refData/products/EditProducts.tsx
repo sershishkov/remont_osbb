@@ -28,6 +28,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const initState = {
   productName: '',
+  description: '',
   unit: '',
   productType: '',
   productGroup: [],
@@ -64,6 +65,7 @@ function EditProducts() {
 
   const {
     productName,
+    description,
     unit,
     productType,
     productGroup,
@@ -99,6 +101,7 @@ function EditProducts() {
 
       setFormdata({
         productName: item.productName!,
+        description: item.description!,
 
         unit: typeof item.unit! === 'string' ? item.unit : item.unit?._id!,
         productType:
@@ -133,6 +136,7 @@ function EditProducts() {
     const created__Data = {
       _id: id,
       productName,
+      description,
       unit,
       productGroup,
       productType,
@@ -199,6 +203,20 @@ function EditProducts() {
           type='text'
           id='productName'
           value={productName ?? ''}
+          onChange={onChange}
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          margin='normal'
+          multiline
+          maxRows={4}
+          fullWidth
+          name='description'
+          label='Описание'
+          type='text'
+          id='description'
+          value={description ?? ''}
           onChange={onChange}
         />
       </Grid>

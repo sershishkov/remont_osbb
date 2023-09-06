@@ -29,6 +29,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const initState = {
   serviceWorkName: '',
+  description: '',
   unit: '',
   serviceWorkGroup: [],
   priceWorkerRecommend: '',
@@ -111,6 +112,7 @@ function EditServiceWorks() {
 
   const {
     serviceWorkName,
+    description,
     unit,
     serviceWorkGroup,
     priceWorkerRecommend,
@@ -165,6 +167,7 @@ function EditServiceWorks() {
 
       setFormdata({
         serviceWorkName: item.serviceWorkName!,
+        description: item.description!,
 
         unit: typeof item.unit! === 'string' ? item.unit : item.unit?._id!,
 
@@ -200,6 +203,7 @@ function EditServiceWorks() {
     const created__Data = {
       _id: id,
       serviceWorkName,
+      description,
       unit,
       serviceWorkGroup,
 
@@ -270,6 +274,20 @@ function EditServiceWorks() {
           type='text'
           id='serviceWorkName'
           value={serviceWorkName ?? ''}
+          onChange={onChange}
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          margin='normal'
+          multiline
+          maxRows={4}
+          fullWidth
+          name='description'
+          label='Описание'
+          type='text'
+          id='description'
+          value={description ?? ''}
           onChange={onChange}
         />
       </Grid>

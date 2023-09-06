@@ -20,7 +20,7 @@ export interface I_ProductType {
 export interface I_Product {
   _id?: string;
   productName: string;
-
+  description: string;
   unit: Types.ObjectId;
   productGroup: Types.ObjectId[];
   productType: Types.ObjectId;
@@ -47,6 +47,7 @@ export interface I_ThirdPartyServiceGroup {
 export interface I_ServiceWork {
   _id?: string;
   serviceWorkName: string;
+  description: string;
   unit: Types.ObjectId;
   serviceWorkGroup: Types.ObjectId[];
   priceWorkerRecommend: number;
@@ -63,7 +64,7 @@ export interface I_ServiceWork {
 export interface I_ThirdPartyService {
   _id?: string;
   thirdPartyServiceName: string;
-
+  description: string;
   unit: Types.ObjectId;
   thirdPartyServiceGroup: Types.ObjectId[];
   priceBuyRecommend: number;

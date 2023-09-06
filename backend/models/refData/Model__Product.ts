@@ -8,6 +8,10 @@ const product__Schema = new Schema<I_Product>({
     required: [true, 'Please add a product name'],
     unique: true,
   },
+  description: {
+    type: String,
+    default: 'Пока нет описания',
+  },
   unit: {
     type: Schema.Types.ObjectId,
     ref: 'unit',

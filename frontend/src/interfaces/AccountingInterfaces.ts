@@ -22,7 +22,7 @@ export interface I_ProductType extends I_ClientRequest {
 export interface I_Product extends I_ClientRequest {
   _id?: string;
   productName?: string;
-
+  description?: string;
   unit?: string | I_Unit;
   productGroup?: string[] | I_ProductGroup[];
   productType?: string | I_ProductType;
@@ -50,6 +50,7 @@ export interface I_ThirdPartyServiceGroup extends I_ClientRequest {
 export interface I_ServiceWork extends I_ClientRequest {
   _id?: string;
   serviceWorkName?: string;
+  description?: string;
   unit?: string | I_Unit;
   serviceWorkGroup?: string[] | I_ServiceWorkGroup[];
   priceWorkerRecommend?: number;
@@ -66,7 +67,7 @@ export interface I_ServiceWork extends I_ClientRequest {
 export interface I_ThirdPartyService extends I_ClientRequest {
   _id?: string;
   thirdPartyServiceName?: string;
-
+  description?: string;
   unit?: string | I_Unit;
   thirdPartyServiceGroup?: string[] | I_ThirdPartyServiceGroup[];
   priceBuyRecommend?: number;

@@ -8,6 +8,10 @@ const serviceWork__Schema = new Schema<I_ServiceWork>({
     required: [true, 'Please add a serviceWork name'],
     unique: true,
   },
+  description: {
+    type: String,
+    default: 'Пока нет описания',
+  },
   unit: {
     type: Schema.Types.ObjectId,
     ref: 'unit',
