@@ -70,3 +70,28 @@ export interface I_ThirdPartyService {
   priceBuyRecommend: number;
 }
 //////////////////////////////////////////
+
+export interface I_WorkerProfession {
+  _id?: string;
+  workerProfessionName: string;
+  description: string;
+}
+
+export interface I_Worker {
+  _id?: string;
+  firstName: string;
+  patronymic?: string;
+  lastName: string;
+
+  workerProfessions: Types.ObjectId[];
+  passportSeries?: string;
+  passportNumber?: string;
+  representedBy?: string;
+  whenIssued?: Date;
+
+  inn?: string;
+  birthDay?: Date;
+
+  telNumber?: string;
+  email?: string;
+}

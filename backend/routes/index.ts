@@ -15,6 +15,9 @@ import router__ServiceWorkGroup from './refData/router__ServiceWorkGroup';
 import router__ThirdPartyService from './refData/router__ThirdPartyService';
 import router__ThirdPartyServiceGroup from './refData/router__ThirdPartyServiceGroup';
 
+import router__WorkerProfession from './refData/router__WorkerProfession';
+import router__Worker from './refData/router__Worker';
+
 router.use('/auth', router__Auth);
 router.use('/users', router__AdminUsers);
 
@@ -27,5 +30,8 @@ router.use('/refdata/servicework-group', router__ServiceWorkGroup);
 router.use('/refdata/thirdpartyservice-group', router__ThirdPartyServiceGroup);
 router.use('/refdata/serviceworks', router__ServiceWork);
 router.use('/refdata/thirdpartyservices', router__ThirdPartyService);
+
+router.use('/refdata/workerprofession', router__WorkerProfession);
+router.use('/refdata/workers', router__Worker);
 
 export default router;
